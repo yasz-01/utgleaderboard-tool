@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELO Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/ffa" class="sidebar-item ffa-item {% if leaderboard_type == 'ffa' %}active{% endif %}" title="FFA">
+            <span class="icon">⚔️</span>
+            <span class="label">FFA</span>
+        </a>
+        <a href="/classic" class="sidebar-item classic-item {% if leaderboard_type == 'classic' %}active{% endif %}" title="Classic">
+            <span class="icon">🎮</span>
+            <span class="label">Classic</span>
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>{% if leaderboard_type == 'ffa' %}FFA{% else %}{{ leaderboard_type.title() }}{% endif %} Leaderboard</h1>
+                <p class="subtitle">Track players with combined Star and Rank ratings</p>
+            </div>
+            <div class="header-buttons">
+                <button class="btn-delete-all" onclick="deleteAll()" title="Delete all players">🗑️ Delete All</button>
+                <button class="btn-export" onclick="exportLeaderboard()" title="Export to Discord">⬆️</button>
+                <button class="btn-import" onclick="openImportModal()" title="Import from Discord">⬇️</button>
+                <button class="btn-add" onclick="openModal()">+ Add Player</button>
+            </div>
+        </div>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modalTitle">Add New Player</h2>
+                <form id="playerForm" onsubmit="addPlayer(event)">
+                    <div class="form-group">
+                        <label for="playerName">Player Name:</label>
+                        <input type="text" id="playerName" required>
+                    </div>
+                    <div id="classicFields">
+                        <div class="form-group">
+                            <label for="rankRatingClassic">Rank Rating:</label>
+                            <select id="rankRatingClassic">
+                                <option value="">Select Rank</option>
+                                {% for rank in ranks %}
+                                <option value="{{ rank }}">{{ rank }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div id="ffaFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="starRatingFFA">Star Rating:</label>
+                            <select id="starRatingFFA">
+                                <option value="">Select Stars</option>
+                                {% for star in stars %}
+                                <option value="{{ star }}">{{ star }} ⭐</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="robloxLink">Roblox Profile Link:</label>
+                        <input type="url" id="robloxLink" placeholder="https://www.roblox.com/users/...">
+                    </div>
+                    <button type="submit" class="btn-submit">Add Player</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="exportModal" class="modal">
+            <div class="modal-content export-modal-content">
+                <span class="close" onclick="closeExportModal()">&times;</span>
+                <h2>Export to Discord <span id="exportMessageCount" style="font-size: 14px; color: #888;"></span></h2>
+                <textarea id="exportText" class="export-textarea" readonly></textarea>
+                <div class="export-actions">
+                    <button class="btn-copy" onclick="copyExportText()">📋 Copy to Clipboard</button>
+                    <button class="btn-cancel" onclick="closeExportModal()">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="importModal" class="modal">
+            <div class="modal-content export-modal-content">
+                <span class="close" onclick="closeImportModal()">&times;</span>
+                <h2>Import Leaderboard</h2>
+                <div class="form-group">
+                    <label for="importTarget">Import into:</label>
+                    <select id="importTarget">
+                        <option value="ffa">FFA</option>
+                        <option value="classic">Classic</option>
+                    </select>
+                </div>
+                <textarea id="importText" class="export-textarea" placeholder="Paste leaderboard data here..."></textarea>
+                <div class="export-actions">
+                    <button class="btn-import-submit" onclick="submitImport()">Import</button>
+                    <button class="btn-cancel" onclick="closeImportModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <table class="leaderboard">
+            <thead id="tableHead">
+                <tr id="classicHeader">
+                    <th>#</th>
+                    <th>Player Name</th>
+                    <th>Rank Rating</th>
+                    <th>Rank Pts</th>
+                    <th>Roblox Profile</th>
+                    <th>Actions</th>
+                </tr>
+                <tr id="ffaHeader" style="display: none;">
+                    <th>#</th>
+                    <th>Player Name</th>
+                    <th>Star Rating</th>
+                    <th>Star Pts</th>
+                    <th>Roblox Profile</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="playerRows">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

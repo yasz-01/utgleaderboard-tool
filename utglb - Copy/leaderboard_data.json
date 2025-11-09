@@ -1,0 +1,79 @@
+[
+  {
+    "name": "Guest",
+    "rank": "A+ High",
+    "stars": 5.0,
+    "rank_points": 9,
+    "star_points": 11.5,
+    "rank_percentage": 75.0,
+    "star_percentage": 95.83333333333334,
+    "final_score": 85.41666666666667,
+    "roblox_link": ""
+  },
+  {
+    "name": "Moth",
+    "rank": "S Low",
+    "stars": 3.0,
+    "rank_points": 10,
+    "star_points": 6.9,
+    "rank_percentage": 83.33333333333334,
+    "star_percentage": 57.50000000000001,
+    "final_score": 70.41666666666667,
+    "roblox_link": ""
+  },
+  {
+    "name": "Swatthat",
+    "rank": "A+ Low",
+    "stars": 3.0,
+    "rank_points": 7,
+    "star_points": 6.9,
+    "rank_percentage": 58.333333333333336,
+    "star_percentage": 57.50000000000001,
+    "final_score": 57.91666666666667,
+    "roblox_link": ""
+  },
+  {
+    "name": "dt",
+    "rank": "A+ Mid",
+    "stars": 2.5,
+    "rank_points": 8,
+    "star_points": 5.75,
+    "rank_percentage": 66.66666666666666,
+    "star_percentage": 47.91666666666667,
+    "final_score": 57.291666666666664,
+    "roblox_link": ""
+  },
+  {
+    "name": "hayley",
+    "rank": "A Low",
+    "stars": 4.0,
+    "rank_points": 4,
+    "star_points": 9.2,
+    "rank_percentage": 33.33333333333333,
+    "star_percentage": 76.66666666666666,
+    "final_score": 54.99999999999999,
+    "roblox_link": ""
+  },
+  {
+    "name": "zane",
+    "rank": "A Mid",
+    "stars": 3.0,
+    "rank_points": 5,
+    "star_points": 6.9,
+    "rank_percentage": 41.66666666666667,
+    "star_percentage": 57.50000000000001,
+    "final_score": 49.58333333333334,
+    "roblox_link": ""
+  },
+  {
+    "name": "Kermit",
+    "rank": "A Low",
+    "stars": 3.0,
+    "rank_points": 4,
+    "star_points": 6.9,
+    "rank_percentage": 33.33333333333333,
+    "star_percentage": 57.50000000000001,
+    "final_score": 45.41666666666667,
+    "roblox_link": ""
+  }
+]
